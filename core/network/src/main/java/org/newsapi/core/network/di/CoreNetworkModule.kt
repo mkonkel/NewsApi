@@ -21,10 +21,11 @@ import javax.inject.Singleton
 object CoreNetworkModule {
     @Provides
     @Singleton
-    fun provideJson(): Json = Json {
-        ignoreUnknownKeys = true
-        isLenient = true
-    }
+    fun provideJson(): Json =
+        Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }
 
     @Provides
     @Singleton
@@ -32,7 +33,8 @@ object CoreNetworkModule {
         Interceptor { chain ->
             val originalRequest = chain.request()
             val newRequest =
-                originalRequest.newBuilder()
+                originalRequest
+                    .newBuilder()
                     .header(NetworkConfig.API_KEY_HEADER, BuildConfig.NEWS_API_KEY)
                     .build()
             chain.proceed(newRequest)
@@ -40,9 +42,7 @@ object CoreNetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(
-        authInterceptor: Interceptor,
-    ): OkHttpClient =
+    fun provideOkHttpClient(authInterceptor: Interceptor): OkHttpClient =
         OkHttpClient
             .Builder()
             .connectTimeout(NetworkConfig.TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -57,8 +57,7 @@ object CoreNetworkModule {
                         },
                     )
                 }
-            }
-            .build()
+            }.build()
 
     @Provides
     @Singleton
