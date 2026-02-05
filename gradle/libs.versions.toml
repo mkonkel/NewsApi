@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.2"
+agp = "9.0.0"
 kotlin = "2.3.0"
 ksp = "2.3.5"
 hilt = "2.59.1"
@@ -15,6 +15,7 @@ material = "1.13.0"
 composeBom = "2026.01.01"
 room = "2.8.4"
 retrofit = "3.0.0"
+okhttp = "5.3.2"
 kotest = "6.1.2"
 turbine = "1.2.1"
 kotlinxSerialization = "1.10.0"
@@ -26,11 +27,14 @@ lifecycleCompose = "2.10.0"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-hilt-android = { group = "google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
 # network
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-kotlinx-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
 # compose

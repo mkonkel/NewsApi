@@ -2,8 +2,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -13,6 +14,11 @@ android {
     defaultConfig {
         minSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "NEWS_API_KEY", "\"${project.findProperty("news.api.key") ?: ""}\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     compileOptions {
@@ -29,7 +35,13 @@ kotlin {
 
 dependencies {
     implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
     implementation(libs.kotlinx.serialization)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.hilt.android)
+
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
 }
