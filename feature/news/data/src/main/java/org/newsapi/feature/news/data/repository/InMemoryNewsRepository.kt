@@ -6,7 +6,10 @@ import java.time.LocalDate
 internal interface InMemoryNewsRepository {
     suspend fun getArticles(): List<ArticleResponse>
 
-    suspend fun saveArticles(articles: List<ArticleResponse>, fetchDate: LocalDate)
+    suspend fun saveArticles(
+        articles: List<ArticleResponse>,
+        fetchDate: LocalDate,
+    )
 
     suspend fun getLastFetchDate(): LocalDate?
 }

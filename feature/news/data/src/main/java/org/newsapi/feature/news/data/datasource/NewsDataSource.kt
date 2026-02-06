@@ -1,4 +1,4 @@
-package org.newsapi.feature.news.data.repository
+package org.newsapi.feature.news.data.datasource
 
 import org.newsapi.feature.news.data.remote.response.ArticleResponse
 

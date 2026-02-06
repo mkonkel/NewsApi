@@ -21,13 +21,14 @@ internal object DataDatabaseModule {
     @Singleton
     fun provideNewsDatabase(
         @ApplicationContext context: Context,
-    ): NewsDatabase = Room.databaseBuilder(
-        context,
-        NewsDatabase::class.java,
-        "news_database",
-    )
-        .fallbackToDestructiveMigration(dropAllTables = true)
-        .build()
+    ): NewsDatabase =
+        Room
+            .databaseBuilder(
+                context,
+                NewsDatabase::class.java,
+                "news_database",
+            ).fallbackToDestructiveMigration(dropAllTables = true)
+            .build()
 
     @Provides
     @Singleton

@@ -4,12 +4,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.newsapi.feature.news.data.repository.DateProvider
-import org.newsapi.feature.news.data.repository.DateProviderImpl
+import org.newsapi.feature.news.data.datasource.NewsDataSource
+import org.newsapi.feature.news.data.datasource.NewsDataSourceImpl
+import org.newsapi.feature.news.data.date.DateProvider
+import org.newsapi.feature.news.data.date.DateProviderImpl
 import org.newsapi.feature.news.data.repository.HttpNewsRepositoryImpl
 import org.newsapi.feature.news.data.repository.InMemoryNewsRepositoryImpl
-import org.newsapi.feature.news.data.repository.NewsDataSource
-import org.newsapi.feature.news.data.repository.NewsDataSourceImpl
 import javax.inject.Singleton
 
 @Module
@@ -25,9 +25,10 @@ internal object DataModule {
         httpRepository: HttpNewsRepositoryImpl,
         inMemoryRepository: InMemoryNewsRepositoryImpl,
         dateProvider: DateProviderImpl,
-    ): NewsDataSource = NewsDataSourceImpl(
-        httpRepository = httpRepository,
-        inMemoryRepository = inMemoryRepository,
-        dateProvider = dateProvider,
-    )
+    ): NewsDataSource =
+        NewsDataSourceImpl(
+            httpRepository = httpRepository,
+            inMemoryRepository = inMemoryRepository,
+            dateProvider = dateProvider,
+        )
 }

@@ -15,11 +15,9 @@ import javax.inject.Singleton
 internal object DataNetworkModule {
     @Provides
     @Singleton
-    fun provideNewsApiService(retrofit: Retrofit): NewsApiService =
-        retrofit.create(NewsApiService::class.java)
+    fun provideNewsApiService(retrofit: Retrofit): NewsApiService = retrofit.create(NewsApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideHttpNewsRepository(service: NewsApiService): HttpNewsRepository =
-        HttpNewsRepositoryImpl(service)
+    fun provideHttpNewsRepository(service: NewsApiService): HttpNewsRepository = HttpNewsRepositoryImpl(service)
 }

@@ -1,4 +1,4 @@
-package org.newsapi.feature.news.data.repository
+package org.newsapi.feature.news.data.date
 
 import java.time.LocalDate
 import javax.inject.Inject

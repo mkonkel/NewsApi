@@ -17,5 +17,6 @@ import org.newsapi.feature.news.data.local.entity.CacheMetadataEntity
 @TypeConverters(LocalDateConverter::class)
 internal abstract class NewsDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
+
     abstract fun cacheMetadataDao(): CacheMetadataDao
 }
