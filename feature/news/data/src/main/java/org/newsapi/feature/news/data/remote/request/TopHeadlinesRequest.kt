@@ -1,7 +1,7 @@
 package org.newsapi.feature.news.data.remote.request
 
 data class TopHeadlinesRequest(
-    val category: String? = "general",
+    val category: Category? = Category.GENERAL,
     val country: String? = null,
     val sources: String? = null,
     val query: String? = null,
@@ -11,5 +11,11 @@ data class TopHeadlinesRequest(
     companion object {
         const val DEFAULT_PAGE_SIZE = 20
         const val DEFAULT_PAGE = 1
+    }
+
+    enum class Category(
+        val value: String,
+    ) {
+        GENERAL("general"),
     }
 }

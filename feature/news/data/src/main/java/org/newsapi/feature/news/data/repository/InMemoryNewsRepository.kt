@@ -1,14 +1,12 @@
 package org.newsapi.feature.news.data.repository
 
 import org.newsapi.feature.news.data.remote.response.ArticleResponse
+import java.time.LocalDate
 
 internal interface InMemoryNewsRepository {
-    suspend fun getTopHeadlines(
-        category: String? = null,
-        country: String? = null,
-        sources: String? = null,
-        query: String? = null,
-        pageSize: Int = 20,
-        page: Int = 1,
-    ): List<ArticleResponse>
+    suspend fun getArticles(): List<ArticleResponse>
+
+    suspend fun saveArticles(articles: List<ArticleResponse>, fetchDate: LocalDate)
+
+    suspend fun getLastFetchDate(): LocalDate?
 }
