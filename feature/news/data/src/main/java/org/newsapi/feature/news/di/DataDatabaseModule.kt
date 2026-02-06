@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import org.newsapi.feature.news.data.local.NewsDatabase
 import org.newsapi.feature.news.data.local.dao.ArticleDao
+import org.newsapi.feature.news.data.local.dao.CacheMetadataDao
 import org.newsapi.feature.news.data.repository.InMemoryNewsRepository
 import org.newsapi.feature.news.data.repository.InMemoryNewsRepositoryImpl
 import javax.inject.Singleton
@@ -34,6 +35,12 @@ internal object DataDatabaseModule {
 
     @Provides
     @Singleton
-    fun provideInMemoryNewsRepository(articleDao: ArticleDao): InMemoryNewsRepository =
-        InMemoryNewsRepositoryImpl(articleDao)
+    fun provideCacheMetadataDao(database: NewsDatabase): CacheMetadataDao = database.cacheMetadataDao()
+
+    @Provides
+    @Singleton
+    fun provideInMemoryNewsRepository(
+        articleDao: ArticleDao,
+        cacheMetadataDao: CacheMetadataDao,
+    ): InMemoryNewsRepository = InMemoryNewsRepositoryImpl(articleDao, cacheMetadataDao)
 }

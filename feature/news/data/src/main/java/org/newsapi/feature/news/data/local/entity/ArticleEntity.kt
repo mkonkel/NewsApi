@@ -25,6 +25,4 @@ internal data class ArticleEntity(
     val publishedAt: String,
     @ColumnInfo(name = "content")
     val content: String?,
-    @ColumnInfo(name = "fetch_date")
-    val fetchDate: String,
 )

@@ -4,7 +4,7 @@ import org.newsapi.feature.news.data.local.entity.ArticleEntity
 import org.newsapi.feature.news.data.remote.response.ArticleResponse
 import org.newsapi.feature.news.data.remote.response.SourceResponse
 
-internal fun ArticleResponse.toEntity(fetchDate: String): ArticleEntity =
+internal fun ArticleResponse.toEntity(): ArticleEntity =
     ArticleEntity(
         url = url,
         sourceId = source.id,
@@ -15,7 +15,6 @@ internal fun ArticleResponse.toEntity(fetchDate: String): ArticleEntity =
         urlToImage = urlToImage,
         publishedAt = publishedAt,
         content = content,
-        fetchDate = fetchDate,
     )
 
 internal fun ArticleEntity.toResponse(): ArticleResponse =

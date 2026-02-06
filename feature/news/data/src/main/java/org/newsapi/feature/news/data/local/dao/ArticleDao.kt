@@ -12,9 +12,6 @@ internal interface ArticleDao {
     @Query("SELECT * FROM articles")
     suspend fun getAll(): List<ArticleEntity>
 
-    @Query("SELECT fetch_date FROM articles LIMIT 1")
-    suspend fun getLastFetchDate(): String?
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(articles: List<ArticleEntity>)
 
