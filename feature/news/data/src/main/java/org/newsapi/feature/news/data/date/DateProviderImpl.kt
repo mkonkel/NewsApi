@@ -3,6 +3,8 @@ package org.newsapi.feature.news.data.date
 import java.time.LocalDate
 import javax.inject.Inject
 
-internal class DateProviderImpl @Inject constructor() : DateProvider {
-    override fun get(): LocalDate = LocalDate.now()
-}
+internal class DateProviderImpl
+    @Inject
+    constructor() : DateProvider {
+        override fun get(): LocalDate = LocalDate.now()
+    }

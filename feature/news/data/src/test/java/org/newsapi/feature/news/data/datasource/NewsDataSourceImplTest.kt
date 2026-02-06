@@ -22,7 +22,6 @@ class NewsDataSourceImplTest {
     private val inMemoryRepository: InMemoryNewsRepository = mock()
     private val dateProvider: DateProvider = mock()
 
-
     private val today = LocalDate.of(2025, 1, 15)
     private val yesterday = LocalDate.of(2025, 1, 14)
 
@@ -53,11 +52,12 @@ class NewsDataSourceImplTest {
             whenever { inMemoryRepository.getLastFetchDate() } doReturn today
             whenever { inMemoryRepository.getArticles() } doReturn cachedArticles
 
-            val dataSource = NewsDataSourceImpl(
-                httpRepository = httpRepository,
-                inMemoryRepository = inMemoryRepository,
-                dateProvider = dateProvider,
-            )
+            val dataSource =
+                NewsDataSourceImpl(
+                    httpRepository = httpRepository,
+                    inMemoryRepository = inMemoryRepository,
+                    dateProvider = dateProvider,
+                )
 
             val result = dataSource.getArticles()
 
@@ -72,11 +72,12 @@ class NewsDataSourceImplTest {
             whenever { inMemoryRepository.getLastFetchDate() } doReturn yesterday
             whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
 
-            val dataSource = NewsDataSourceImpl(
-                httpRepository = httpRepository,
-                inMemoryRepository = inMemoryRepository,
-                dateProvider = dateProvider,
-            )
+            val dataSource =
+                NewsDataSourceImpl(
+                    httpRepository = httpRepository,
+                    inMemoryRepository = inMemoryRepository,
+                    dateProvider = dateProvider,
+                )
 
             val result = dataSource.getArticles()
 
@@ -92,11 +93,12 @@ class NewsDataSourceImplTest {
             whenever { inMemoryRepository.getLastFetchDate() } doReturn null
             whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
 
-            val dataSource = NewsDataSourceImpl(
-                httpRepository = httpRepository,
-                inMemoryRepository = inMemoryRepository,
-                dateProvider = dateProvider,
-            )
+            val dataSource =
+                NewsDataSourceImpl(
+                    httpRepository = httpRepository,
+                    inMemoryRepository = inMemoryRepository,
+                    dateProvider = dateProvider,
+                )
 
             val result = dataSource.getArticles()
 
@@ -112,11 +114,12 @@ class NewsDataSourceImplTest {
             whenever { inMemoryRepository.getLastFetchDate() } doReturn null
             whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
 
-            val dataSource = NewsDataSourceImpl(
-                httpRepository = httpRepository,
-                inMemoryRepository = inMemoryRepository,
-                dateProvider = dateProvider,
-            )
+            val dataSource =
+                NewsDataSourceImpl(
+                    httpRepository = httpRepository,
+                    inMemoryRepository = inMemoryRepository,
+                    dateProvider = dateProvider,
+                )
 
             dataSource.getArticles()
 
@@ -130,11 +133,12 @@ class NewsDataSourceImplTest {
             whenever { inMemoryRepository.getLastFetchDate() } doReturn today
             whenever { inMemoryRepository.getArticles() } doReturn cachedArticles
 
-            val dataSource = NewsDataSourceImpl(
-                httpRepository = httpRepository,
-                inMemoryRepository = inMemoryRepository,
-                dateProvider = dateProvider,
-            )
+            val dataSource =
+                NewsDataSourceImpl(
+                    httpRepository = httpRepository,
+                    inMemoryRepository = inMemoryRepository,
+                    dateProvider = dateProvider,
+                )
 
             dataSource.getArticles()
 

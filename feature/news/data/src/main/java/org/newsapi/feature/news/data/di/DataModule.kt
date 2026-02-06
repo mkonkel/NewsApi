@@ -10,6 +10,8 @@ import org.newsapi.feature.news.data.date.DateProvider
 import org.newsapi.feature.news.data.date.DateProviderImpl
 import org.newsapi.feature.news.data.repository.HttpNewsRepositoryImpl
 import org.newsapi.feature.news.data.repository.InMemoryNewsRepositoryImpl
+import org.newsapi.feature.news.data.repository.NewsRepositoryImpl
+import org.newsapi.feature.news.domain.repository.NewsRepository
 import javax.inject.Singleton
 
 @Module
@@ -31,4 +33,8 @@ internal object DataModule {
             inMemoryRepository = inMemoryRepository,
             dateProvider = dateProvider,
         )
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(newsDataSource: NewsDataSource): NewsRepository = NewsRepositoryImpl(newsDataSource)
 }
