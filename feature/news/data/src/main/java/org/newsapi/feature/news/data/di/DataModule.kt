@@ -1,4 +1,4 @@
-package org.newsapi.feature.news.di
+package org.newsapi.feature.news.data.di
 
 import dagger.Module
 import dagger.Provides
