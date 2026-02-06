@@ -12,9 +12,9 @@ internal class InMemoryNewsRepositoryImpl @Inject constructor() : InMemoryNewsRe
         query: String?,
         pageSize: Int,
         page: Int,
-    ): Result<List<ArticleResponse>> {
+    ): List<ArticleResponse> {
         // TODO: Implement when storage layer is ready
         delay(100)
-        return Result.failure(NotImplementedError("InMemory not implemented yet"))
+        throw NotImplementedError("InMemory not implemented yet")
     }
 }

@@ -10,5 +10,5 @@ internal interface InMemoryNewsRepository {
         query: String? = null,
         pageSize: Int = 20,
         page: Int = 1,
-    ): Result<List<ArticleResponse>>
+    ): List<ArticleResponse>
 }
