@@ -9,6 +9,7 @@ import org.newsapi.feature.news.data.datasource.NewsDataSourceImpl
 import org.newsapi.feature.news.data.date.DateProvider
 import org.newsapi.feature.news.data.date.DateProviderImpl
 import org.newsapi.feature.news.data.repository.HttpNewsRepositoryImpl
+import org.newsapi.feature.news.data.repository.InMemoryNewsRepository
 import org.newsapi.feature.news.data.repository.InMemoryNewsRepositoryImpl
 import org.newsapi.feature.news.data.repository.NewsRepositoryImpl
 import org.newsapi.feature.news.domain.repository.NewsRepository
@@ -36,5 +37,8 @@ internal object DataModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(newsDataSource: NewsDataSource): NewsRepository = NewsRepositoryImpl(newsDataSource)
+    fun provideNewsRepository(
+        newsDataSource: NewsDataSource,
+        inMemoryNewsRepository: InMemoryNewsRepository
+    ): NewsRepository = NewsRepositoryImpl(newsDataSource, inMemoryNewsRepository)
 }

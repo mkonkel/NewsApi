@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -31,7 +33,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":feature:news:domain"))
     implementation(project(":core:ui"))
 
     implementation(platform(libs.compose.bom))
@@ -42,11 +43,18 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.navigation.compose)
+    implementation(libs.hilt.navigation.compose)
+
+    ksp(libs.hilt.compiler)
 
     debugImplementation(libs.compose.ui.tooling)
 
     testImplementation(libs.junit)
     testImplementation(libs.turbine)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.compose.ui.test.junit4)
     debugImplementation(libs.compose.ui.test.manifest)
 }

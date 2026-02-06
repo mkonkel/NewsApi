@@ -26,6 +26,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":feature:news:presentation"))
+
     implementation(libs.androidx.core.ktx)
 
     testImplementation(libs.junit)
