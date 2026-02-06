@@ -15,6 +15,8 @@ internal class InMemoryNewsRepositoryImpl
     ) : InMemoryNewsRepository {
         override suspend fun getArticles(): List<ArticleResponse> = articleDao.getAll().map { it.toResponse() }
 
+        override suspend fun getArticleByUrl(url: String): ArticleResponse? = articleDao.getByUrl(url)?.toResponse()
+
         override suspend fun saveArticles(
             articles: List<ArticleResponse>,
             fetchDate: LocalDate,

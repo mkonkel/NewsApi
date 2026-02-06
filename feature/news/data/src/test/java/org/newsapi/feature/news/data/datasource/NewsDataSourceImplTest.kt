@@ -144,4 +144,25 @@ class NewsDataSourceImplTest {
 
             verify(inMemoryRepository, never()).saveArticles(any(), any())
         }
+
+    @Test
+    fun `fetches from network when forceRefresh is true even if cache is fresh`() =
+        runTest {
+            whenever { dateProvider.get() } doReturn today
+            whenever { inMemoryRepository.getLastFetchDate() } doReturn today
+            whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
+
+            val dataSource =
+                NewsDataSourceImpl(
+                    httpRepository = httpRepository,
+                    inMemoryRepository = inMemoryRepository,
+                    dateProvider = dateProvider,
+                )
+
+            val result = dataSource.getArticles(forceRefresh = true)
+
+            assertEquals(httpArticles, result)
+            verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
+            verify(inMemoryRepository).saveArticles(httpArticles, today)
+        }
 }

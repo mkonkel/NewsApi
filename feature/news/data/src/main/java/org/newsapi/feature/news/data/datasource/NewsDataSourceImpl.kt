@@ -14,11 +14,11 @@ internal class NewsDataSourceImpl
         private val inMemoryRepository: InMemoryNewsRepository,
         private val dateProvider: DateProvider,
     ) : NewsDataSource {
-        override suspend fun getArticles(): List<ArticleResponse> {
+        override suspend fun getArticles(forceRefresh: Boolean): List<ArticleResponse> {
             val today = dateProvider.get()
             val lastFetchDate = inMemoryRepository.getLastFetchDate()
 
-            if (lastFetchDate == today) {
+            if (!forceRefresh && lastFetchDate == today) {
                 return inMemoryRepository.getArticles()
             }
 
