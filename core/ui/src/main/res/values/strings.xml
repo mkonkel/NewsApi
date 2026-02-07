@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back_button_content_description">Navigate back</string>
+    <string name="share_content_description">Share</string>
+    <string name="retry_button_label">Retry</string>
+</resources>
