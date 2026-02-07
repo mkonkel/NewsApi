@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import org.newsapi.core.ui.theme.Dimens
 import org.newsapi.core.ui.widgets.AppErrorState
 import org.newsapi.core.ui.widgets.AppToolbar
 import org.newsapi.feature.news.presentation.R
@@ -31,10 +32,10 @@ fun NewsListScreen(
         },
     ) { paddingValues ->
         Box(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .padding(horizontal = Dimens.PaddingMedium),
         ) {
             when (val currentState = state) {
                 is NewsListState.Loading -> {

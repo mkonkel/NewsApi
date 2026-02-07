@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import org.newsapi.core.ui.widgets.AppErrorState
-import org.newsapi.core.ui.widgets.AppFab
 import org.newsapi.core.ui.widgets.AppToolbar
 import org.newsapi.feature.news.presentation.R
 
@@ -27,21 +28,25 @@ fun ArticleDetailScreen(
     val state by viewModel.state.collectAsState()
     val context = LocalContext.current
 
+    val fallbackTitle = stringResource(id = R.string.app_name)
+    val toolbarTitle = when (val currentState = state) {
+        is ArticleDetailState.Content -> currentState.article.title ?: fallbackTitle
+        else -> fallbackTitle
+    }
+
+    val contentState = state as? ArticleDetailState.Content
+
     Scaffold(
         topBar = {
             AppToolbar(
-                title = stringResource(id = R.string.app_name),
+                title = toolbarTitle,
                 showBackButton = true,
                 onBackClick = onBackClick,
+                actionIcon = if (contentState != null) Icons.Default.Share else null,
+                onActionClick = {
+                    contentState?.let { shareArticle(context, it.article.url) }
+                },
             )
-        },
-        floatingActionButton = {
-            val currentState = state
-            if (currentState is ArticleDetailState.Content && currentState.showFab) {
-                AppFab(
-                    onClick = { shareArticle(context, currentState.article.url) },
-                )
-            }
         },
     ) { paddingValues ->
         Box(
@@ -58,9 +63,6 @@ fun ArticleDetailScreen(
                     ArticleDetailContent(
                         article = currentState.article,
                         onArticleUrlClick = { url -> openArticleInBrowser(context, url) },
-                        onScroll = { scrollPosition ->
-                            viewModel.onScrollChanged(scrollPosition)
-                        },
                     )
                 }
 

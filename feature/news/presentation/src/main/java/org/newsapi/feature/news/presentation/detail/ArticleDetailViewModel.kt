@@ -27,16 +27,6 @@ class ArticleDetailViewModel @Inject constructor(
         loadArticle()
     }
 
-    fun onScrollChanged(scrollPosition: Int) {
-        val currentState = _state.value
-        if (currentState is ArticleDetailState.Content) {
-            val shouldShowFab = scrollPosition > SCROLL_THRESHOLD
-            if (currentState.showFab != shouldShowFab) {
-                _state.value = currentState.copy(showFab = shouldShowFab)
-            }
-        }
-    }
-
     @Suppress("TooGenericExceptionCaught")
     private fun loadArticle() {
         viewModelScope.launch {
@@ -52,9 +42,5 @@ class ArticleDetailViewModel @Inject constructor(
                 _state.value = ArticleDetailState.Error(e.message ?: "Unknown error")
             }
         }
-    }
-
-    private companion object {
-        const val SCROLL_THRESHOLD = 100
     }
 }
