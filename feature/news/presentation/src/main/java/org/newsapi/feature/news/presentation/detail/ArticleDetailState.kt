@@ -7,6 +7,7 @@ sealed interface ArticleDetailState {
 
     data class Content(
         val article: Article,
+        val showFab: Boolean = false,
     ) : ArticleDetailState
 
     data class Error(
