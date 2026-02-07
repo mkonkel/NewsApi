@@ -1,4 +1,4 @@
-w# NewsApi
+# NewsApi
 
 A modern Android news reader application that fetches and displays the latest headlines
 from [NewsAPI.org](https://newsapi.org).
@@ -103,3 +103,9 @@ The project enforces code quality through automated checks:
 # Run static analysis
 ./gradlew detekt
 ```
+
+## Screenshots
+
+| | | | |
+|:---:|:---:|:---:|:---:|
+| <img src="images/app.gif" alt="App Demo" width="200"/> | <img src="images/app_1.png" alt="Screen 1" width="200"/> | <img src="images/app_2.png" alt="Screen 2" width="200"/> | <img src="images/app_3.png" alt="Screen 3" width="200"/> |
