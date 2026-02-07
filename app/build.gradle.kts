@@ -48,8 +48,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":core:ui"))
     implementation(project(":feature:news:presentation"))
-    implementation(project(":feature:news:data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(platform(libs.compose.bom))
