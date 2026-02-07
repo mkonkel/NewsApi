@@ -1,4 +1,9 @@
+import java.util.Properties
+
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+val localProperties = Properties()
+rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { localProperties.load(it) }
 
 plugins {
     alias(libs.plugins.android.library)
@@ -14,7 +19,7 @@ android {
     defaultConfig {
         minSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "NEWS_API_KEY", "\"${project.findProperty("news.api.key") ?: ""}\"")
+        buildConfigField("String", "NEWS_API_KEY", "\"${localProperties.getProperty("news.api.key", "")}\"")
     }
 
     buildFeatures {
