@@ -8,3 +8,6 @@ ij_kotlin_allow_trailing_comma_on_call_site = true
 
 # Disable function-naming rule to allow PascalCase for @Composable functions
 ktlint_function_naming_ignore_when_annotated_with=Composable
+
+# Keep @Inject constructor on the same line as class name
+ktlint_standard_class-signature = disabled
