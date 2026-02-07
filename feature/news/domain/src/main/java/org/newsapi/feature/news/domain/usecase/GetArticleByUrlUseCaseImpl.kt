@@ -21,7 +21,7 @@ internal class GetArticleByUrlUseCaseImpl(
                 source = it.source.name,
                 url = it.url,
                 publishedAt = it.publishedAt,
-                author = it.author
+                author = it.author,
             )
         }
 }

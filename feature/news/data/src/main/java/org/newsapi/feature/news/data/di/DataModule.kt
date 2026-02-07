@@ -39,6 +39,6 @@ internal object DataModule {
     @Singleton
     fun provideNewsRepository(
         newsDataSource: NewsDataSource,
-        inMemoryNewsRepository: InMemoryNewsRepository
+        inMemoryNewsRepository: InMemoryNewsRepository,
     ): NewsRepository = NewsRepositoryImpl(newsDataSource, inMemoryNewsRepository)
 }
