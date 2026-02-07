@@ -9,9 +9,8 @@ sealed interface NewsListState {
 
     data class Content(
         val articles: List<ArticleListItem>,
+        val isRefreshing: Boolean = false,
     ) : NewsListState
 
-    data class Error(
-        val message: String,
-    ) : NewsListState
+    data class Error(val message: String) : NewsListState
 }

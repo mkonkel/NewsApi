@@ -12,15 +12,16 @@ import androidx.compose.ui.graphics.Color
 import com.valentinilk.shimmer.LocalShimmerTheme
 import com.valentinilk.shimmer.defaultShimmerTheme
 
-private val LightColorScheme = lightColorScheme(
-    primary = Yellow,
-    secondary = Orange,
-    background = Color.White,
-    surface = Color.White,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    onSurfaceVariant = DarkGray,
-)
+private val LightColorScheme =
+    lightColorScheme(
+        primary = Yellow,
+        secondary = Orange,
+        background = Color.White,
+        surface = Color.White,
+        onBackground = Color.Black,
+        onSurface = Color.Black,
+        onSurfaceVariant = DarkGray,
+    )
 
 // TODO: Define dark color scheme
 private val DarkColorScheme = LightColorScheme

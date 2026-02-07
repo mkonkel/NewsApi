@@ -7,11 +7,9 @@ import org.newsapi.feature.news.domain.repository.NewsRepository
 
 internal class NewsRepositoryImpl(
     private val newsDataSource: NewsDataSource,
-    private val inMemoryNewsRepositoryImpl: InMemoryNewsRepository
+    private val inMemoryNewsRepositoryImpl: InMemoryNewsRepository,
 ) : NewsRepository {
-    override suspend fun getArticles(forceRefresh: Boolean): List<Article> =
-        newsDataSource.getArticles(forceRefresh).map { it.toArticle() }
+    override suspend fun getArticles(forceRefresh: Boolean): List<Article> = newsDataSource.getArticles(forceRefresh).map { it.toArticle() }
 
-    override suspend fun getArticleByUrl(url: String): Article? =
-        inMemoryNewsRepositoryImpl.getArticleByUrl(url)?.toArticle()
+    override suspend fun getArticleByUrl(url: String): Article? = inMemoryNewsRepositoryImpl.getArticleByUrl(url)?.toArticle()
 }
