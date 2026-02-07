@@ -2,23 +2,32 @@ package org.newsapi.feature.news.presentation.detail
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import org.newsapi.core.ui.theme.Dimens
+import org.newsapi.core.ui.theme.ExtendedTheme
 import org.newsapi.core.ui.widgets.AppErrorState
 import org.newsapi.core.ui.widgets.AppToolbar
 import org.newsapi.feature.news.presentation.R
+import org.newsapi.feature.news.presentation.dimens.NewsDimens
 
 @Composable
 fun ArticleDetailScreen(
@@ -48,6 +57,26 @@ fun ArticleDetailScreen(
                 },
             )
         },
+        bottomBar = {
+            if (contentState != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(NewsDimens.BottomBarHeight)
+                        .background(ExtendedTheme.colors.accentVariant)
+                        .clickable { openArticleInBrowser(context, contentState.article.url) }
+                        .padding(vertical = Dimens.SpacingMedium),
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.read_full_article),
+                        style = androidx.compose.material3.MaterialTheme.typography.labelLarge,
+                        color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        },
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -62,7 +91,6 @@ fun ArticleDetailScreen(
                 is ArticleDetailState.Content -> {
                     ArticleDetailContent(
                         article = currentState.article,
-                        onArticleUrlClick = { url -> openArticleInBrowser(context, url) },
                     )
                 }
 

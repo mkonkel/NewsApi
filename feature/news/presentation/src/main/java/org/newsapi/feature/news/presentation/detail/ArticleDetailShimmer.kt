@@ -17,7 +17,6 @@ import org.newsapi.core.ui.theme.ExtendedTheme
 import org.newsapi.core.ui.theme.NewsApiTheme
 import org.newsapi.core.ui.widgets.ShimmerBox
 import org.newsapi.core.ui.widgets.ShimmerPlaceholder
-import org.newsapi.feature.news.presentation.dimens.NewsDimens
 
 @Composable
 fun ArticleDetailShimmer(modifier: Modifier = Modifier) {
@@ -38,9 +37,7 @@ fun ArticleDetailShimmer(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(Dimens.SpacingMedium))
 
             ShimmerPlaceholder(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(NewsDimens.DetailImageMaxHeight),
+                modifier = Modifier.fillMaxWidth(),
                 color = ExtendedTheme.colors.shimmerAccent,
             )
             Spacer(modifier = Modifier.height(Dimens.SpacingMedium))
