@@ -48,7 +48,6 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
-    implementation(libs.shimmer)
 
     ksp(libs.hilt.compiler)
 
