@@ -14,10 +14,8 @@ import org.newsapi.feature.news.presentation.domain.GetArticlesUseCase
 @InstallIn(SingletonComponent::class)
 internal object DomainModule {
     @Provides
-    fun provideGetArticlesUseCase(repository: NewsRepository): GetArticlesUseCase =
-        GetArticlesUseCaseImpl(repository)
+    fun provideGetArticlesUseCase(repository: NewsRepository): GetArticlesUseCase = GetArticlesUseCaseImpl(repository)
 
     @Provides
-    fun provideGetArticleByUrlUseCase(repository: NewsRepository): GetArticleByUrlUseCase =
-        GetArticleByUrlUseCaseImpl(repository)
+    fun provideGetArticleByUrlUseCase(repository: NewsRepository): GetArticleByUrlUseCase = GetArticleByUrlUseCaseImpl(repository)
 }

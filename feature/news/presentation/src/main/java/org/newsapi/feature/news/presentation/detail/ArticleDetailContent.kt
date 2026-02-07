@@ -109,16 +109,16 @@ private fun ArticleDetailContentPreview() {
     NewsApiTheme {
         ArticleDetailContent(
             article =
-                Article(
-                    title = "Breaking News",
-                    description = "Lorem ipsum dolor sit amet",
-                    content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
-                    imageUrl = null,
-                    source = "Reuters",
-                    url = "https://example.com/article",
-                    publishedAt = "2026-02-07",
-                    author = "John Doe",
-                ),
+            Article(
+                title = "Breaking News",
+                description = "Lorem ipsum dolor sit amet",
+                content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
+                imageUrl = null,
+                source = "Reuters",
+                url = "https://example.com/article",
+                publishedAt = "2026-02-07",
+                author = "John Doe",
+            ),
         )
     }
 }

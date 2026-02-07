@@ -125,14 +125,14 @@ private fun ArticleCardPreview() {
     NewsApiTheme {
         ArticleCard(
             article =
-                ArticleListItem(
-                    title = "Breaking News: Major Event",
-                    description = "A significant event has occurred that will impact many people across the country.",
-                    imageUrl = null,
-                    url = "https://example.com/article",
-                    source = "Reuters",
-                    author = "John Doe",
-                ),
+            ArticleListItem(
+                title = "Breaking News: Major Event",
+                description = "A significant event has occurred that will impact many people across the country.",
+                imageUrl = null,
+                url = "https://example.com/article",
+                source = "Reuters",
+                author = "John Doe",
+            ),
             onClick = {},
         )
     }

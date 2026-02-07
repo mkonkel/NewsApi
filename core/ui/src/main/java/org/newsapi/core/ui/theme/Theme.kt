@@ -29,10 +29,10 @@ private val DarkColorScheme = LightColorScheme
 private val AppShimmerTheme =
     defaultShimmerTheme.copy(
         animationSpec =
-            infiniteRepeatable(
-                animation = tween(),
-                repeatMode = RepeatMode.Restart,
-            ),
+        infiniteRepeatable(
+            animation = tween(),
+            repeatMode = RepeatMode.Restart,
+        ),
     )
 
 @Composable
