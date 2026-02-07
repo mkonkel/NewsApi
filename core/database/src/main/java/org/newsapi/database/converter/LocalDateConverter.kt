@@ -1,9 +1,9 @@
-package org.newsapi.feature.news.data.local.converter
+package org.newsapi.database.converter
 
 import androidx.room.TypeConverter
 import java.time.LocalDate
 
-internal class LocalDateConverter {
+class LocalDateConverter {
     @TypeConverter
     fun fromLocalDate(date: LocalDate): String = date.toString()
 

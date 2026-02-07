@@ -1,3 +1,4 @@
+
 package org.newsapi.core.network.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -16,6 +17,9 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+// TODO: Invert dependencies - this module should only provide a Retrofit factory.
+//  Each feature module should provide its own BaseUrl, interceptors, and configuration.
+//  This would allow independent communication setups per module.
 @Module
 @InstallIn(SingletonComponent::class)
 object CoreNetworkModule {

@@ -3,7 +3,7 @@ package org.newsapi.feature.news.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import org.newsapi.feature.news.data.local.converter.LocalDateConverter
+import org.newsapi.database.converter.LocalDateConverter
 import org.newsapi.feature.news.data.local.dao.ArticleDao
 import org.newsapi.feature.news.data.local.dao.CacheMetadataDao
 import org.newsapi.feature.news.data.local.entity.ArticleEntity
