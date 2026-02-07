@@ -50,6 +50,8 @@ kotlin {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":feature:news:data"))
+    implementation(project(":feature:news:domain"))
     implementation(project(":feature:news:presentation"))
 
     implementation(libs.androidx.core.ktx)

@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -29,6 +31,9 @@ dependencies {
     implementation(project(":feature:news:presentation"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.hilt.android)
+
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     testImplementation(libs.turbine)
