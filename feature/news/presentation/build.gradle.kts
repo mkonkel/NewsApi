@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -40,6 +41,7 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
+    implementation(libs.compose.material.icons.extended)
     implementation(libs.activity.compose)
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.lifecycle.viewmodel.compose)
@@ -48,6 +50,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.kotlinx.serialization)
 
     ksp(libs.hilt.compiler)
 

@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -59,6 +60,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.navigation.compose)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.kotlinx.serialization)
 
     ksp(libs.hilt.compiler)
 
