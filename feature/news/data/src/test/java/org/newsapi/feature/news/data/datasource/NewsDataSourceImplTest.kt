@@ -46,123 +46,117 @@ class NewsDataSourceImplTest {
         )
 
     @Test
-    fun `returns cached articles when cache is fresh`() =
-        runTest {
-            whenever { dateProvider.get() } doReturn today
-            whenever { inMemoryRepository.getLastFetchDate() } doReturn today
-            whenever { inMemoryRepository.getArticles() } doReturn cachedArticles
+    fun `returns cached articles when cache is fresh`() = runTest {
+        whenever { dateProvider.get() } doReturn today
+        whenever { inMemoryRepository.getLastFetchDate() } doReturn today
+        whenever { inMemoryRepository.getArticles() } doReturn cachedArticles
 
-            val dataSource =
-                NewsDataSourceImpl(
-                    httpRepository = httpRepository,
-                    inMemoryRepository = inMemoryRepository,
-                    dateProvider = dateProvider,
-                )
+        val dataSource =
+            NewsDataSourceImpl(
+                httpRepository = httpRepository,
+                inMemoryRepository = inMemoryRepository,
+                dateProvider = dateProvider,
+            )
 
-            val result = dataSource.getArticles()
+        val result = dataSource.getArticles()
 
-            assertEquals(cachedArticles, result)
-            verify(httpRepository, never()).getTopHeadlines(TopHeadlinesRequest())
-        }
-
-    @Test
-    fun `fetches from network when cache is stale`() =
-        runTest {
-            whenever { dateProvider.get() } doReturn today
-            whenever { inMemoryRepository.getLastFetchDate() } doReturn yesterday
-            whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
-
-            val dataSource =
-                NewsDataSourceImpl(
-                    httpRepository = httpRepository,
-                    inMemoryRepository = inMemoryRepository,
-                    dateProvider = dateProvider,
-                )
-
-            val result = dataSource.getArticles()
-
-            assertEquals(httpArticles, result)
-            verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
-            verify(inMemoryRepository).saveArticles(httpArticles, today)
-        }
+        assertEquals(cachedArticles, result)
+        verify(httpRepository, never()).getTopHeadlines(TopHeadlinesRequest())
+    }
 
     @Test
-    fun `fetches from network when no cache exists`() =
-        runTest {
-            whenever { dateProvider.get() } doReturn today
-            whenever { inMemoryRepository.getLastFetchDate() } doReturn null
-            whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
+    fun `fetches from network when cache is stale`() = runTest {
+        whenever { dateProvider.get() } doReturn today
+        whenever { inMemoryRepository.getLastFetchDate() } doReturn yesterday
+        whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
 
-            val dataSource =
-                NewsDataSourceImpl(
-                    httpRepository = httpRepository,
-                    inMemoryRepository = inMemoryRepository,
-                    dateProvider = dateProvider,
-                )
+        val dataSource =
+            NewsDataSourceImpl(
+                httpRepository = httpRepository,
+                inMemoryRepository = inMemoryRepository,
+                dateProvider = dateProvider,
+            )
 
-            val result = dataSource.getArticles()
+        val result = dataSource.getArticles()
 
-            assertEquals(httpArticles, result)
-            verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
-            verify(inMemoryRepository).saveArticles(httpArticles, today)
-        }
-
-    @Test
-    fun `saves articles with today date when fetching from network`() =
-        runTest {
-            whenever { dateProvider.get() } doReturn today
-            whenever { inMemoryRepository.getLastFetchDate() } doReturn null
-            whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
-
-            val dataSource =
-                NewsDataSourceImpl(
-                    httpRepository = httpRepository,
-                    inMemoryRepository = inMemoryRepository,
-                    dateProvider = dateProvider,
-                )
-
-            dataSource.getArticles()
-
-            verify(inMemoryRepository).saveArticles(httpArticles, today)
-        }
+        assertEquals(httpArticles, result)
+        verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
+        verify(inMemoryRepository).saveArticles(httpArticles, today)
+    }
 
     @Test
-    fun `does not save articles when cache is fresh`() =
-        runTest {
-            whenever { dateProvider.get() } doReturn today
-            whenever { inMemoryRepository.getLastFetchDate() } doReturn today
-            whenever { inMemoryRepository.getArticles() } doReturn cachedArticles
+    fun `fetches from network when no cache exists`() = runTest {
+        whenever { dateProvider.get() } doReturn today
+        whenever { inMemoryRepository.getLastFetchDate() } doReturn null
+        whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
 
-            val dataSource =
-                NewsDataSourceImpl(
-                    httpRepository = httpRepository,
-                    inMemoryRepository = inMemoryRepository,
-                    dateProvider = dateProvider,
-                )
+        val dataSource =
+            NewsDataSourceImpl(
+                httpRepository = httpRepository,
+                inMemoryRepository = inMemoryRepository,
+                dateProvider = dateProvider,
+            )
 
-            dataSource.getArticles()
+        val result = dataSource.getArticles()
 
-            verify(inMemoryRepository, never()).saveArticles(any(), any())
-        }
+        assertEquals(httpArticles, result)
+        verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
+        verify(inMemoryRepository).saveArticles(httpArticles, today)
+    }
 
     @Test
-    fun `fetches from network when forceRefresh is true even if cache is fresh`() =
-        runTest {
-            whenever { dateProvider.get() } doReturn today
-            whenever { inMemoryRepository.getLastFetchDate() } doReturn today
-            whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
+    fun `saves articles with today date when fetching from network`() = runTest {
+        whenever { dateProvider.get() } doReturn today
+        whenever { inMemoryRepository.getLastFetchDate() } doReturn null
+        whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
 
-            val dataSource =
-                NewsDataSourceImpl(
-                    httpRepository = httpRepository,
-                    inMemoryRepository = inMemoryRepository,
-                    dateProvider = dateProvider,
-                )
+        val dataSource =
+            NewsDataSourceImpl(
+                httpRepository = httpRepository,
+                inMemoryRepository = inMemoryRepository,
+                dateProvider = dateProvider,
+            )
 
-            val result = dataSource.getArticles(forceRefresh = true)
+        dataSource.getArticles()
 
-            assertEquals(httpArticles, result)
-            verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
-            verify(inMemoryRepository).saveArticles(httpArticles, today)
-        }
+        verify(inMemoryRepository).saveArticles(httpArticles, today)
+    }
+
+    @Test
+    fun `does not save articles when cache is fresh`() = runTest {
+        whenever { dateProvider.get() } doReturn today
+        whenever { inMemoryRepository.getLastFetchDate() } doReturn today
+        whenever { inMemoryRepository.getArticles() } doReturn cachedArticles
+
+        val dataSource =
+            NewsDataSourceImpl(
+                httpRepository = httpRepository,
+                inMemoryRepository = inMemoryRepository,
+                dateProvider = dateProvider,
+            )
+
+        dataSource.getArticles()
+
+        verify(inMemoryRepository, never()).saveArticles(any(), any())
+    }
+
+    @Test
+    fun `fetches from network when forceRefresh is true even if cache is fresh`() = runTest {
+        whenever { dateProvider.get() } doReturn today
+        whenever { inMemoryRepository.getLastFetchDate() } doReturn today
+        whenever { httpRepository.getTopHeadlines(TopHeadlinesRequest()) } doReturn httpArticles
+
+        val dataSource =
+            NewsDataSourceImpl(
+                httpRepository = httpRepository,
+                inMemoryRepository = inMemoryRepository,
+                dateProvider = dateProvider,
+            )
+
+        val result = dataSource.getArticles(forceRefresh = true)
+
+        assertEquals(httpArticles, result)
+        verify(httpRepository).getTopHeadlines(TopHeadlinesRequest())
+        verify(inMemoryRepository).saveArticles(httpArticles, today)
+    }
 }

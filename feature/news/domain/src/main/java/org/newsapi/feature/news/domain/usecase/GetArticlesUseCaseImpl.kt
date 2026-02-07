@@ -7,18 +7,17 @@ import org.newsapi.feature.news.presentation.domain.model.ArticleListItem
 internal class GetArticlesUseCaseImpl(
     private val repository: NewsRepository,
 ) : GetArticlesUseCase {
-    override suspend fun invoke(forceRefresh: Boolean): List<ArticleListItem> =
-        repository
-            .getArticles(forceRefresh)
-            .sortedByDescending { it.publishedAt }
-            .map {
-                ArticleListItem(
-                    title = it.title,
-                    description = it.description,
-                    imageUrl = it.imageUrl,
-                    url = it.url,
-                    source = it.source.name,
-                    author = it.author,
-                )
-            }
+    override suspend fun invoke(forceRefresh: Boolean): List<ArticleListItem> = repository
+        .getArticles(forceRefresh)
+        .sortedByDescending { it.publishedAt }
+        .map {
+            ArticleListItem(
+                title = it.title,
+                description = it.description,
+                imageUrl = it.imageUrl,
+                url = it.url,
+                source = it.source.name,
+                author = it.author,
+            )
+        }
 }

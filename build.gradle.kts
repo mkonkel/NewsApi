@@ -13,8 +13,13 @@ plugins {
 spotless {
     kotlin {
         target("**/*.kt")
-        targetExclude("**/build/**/*.kt")
-        ktlint()
+        targetExclude("**/build/**/*.kt", "**/getOrThrow.kt")
+        ktlint().editorConfigOverride(
+            mapOf(
+                "ktlint_standard_multiline-expression-wrapping" to "disabled",
+                "ktlint_standard_class-signature" to "disabled",
+            ),
+        )
     }
     kotlinGradle {
         target("**/*.kts")

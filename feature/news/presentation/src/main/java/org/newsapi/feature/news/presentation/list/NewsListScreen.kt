@@ -31,7 +31,8 @@ fun NewsListScreen(
         },
     ) { paddingValues ->
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
         ) {

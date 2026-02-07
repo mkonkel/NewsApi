@@ -48,7 +48,6 @@ fun ArticleDetailContent(
             .padding(vertical = Dimens.PaddingMedium)
             .padding(bottom = NewsDimens.FooterPaddingBottom),
     ) {
-
         if (article.title != null) {
             Text(
                 text = article.title,
@@ -134,16 +133,16 @@ private fun ArticleDetailContentPreview() {
     NewsApiTheme {
         ArticleDetailContent(
             article =
-                Article(
-                    title = "Breaking News",
-                    description = "Lorem ipsum dolor sit amet",
-                    content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
-                    imageUrl = null,
-                    source = "Reuters",
-                    url = "https://example.com/article",
-                    publishedAt = "2026-02-07",
-                    author = "John Doe",
-                ),
+            Article(
+                title = "Breaking News",
+                description = "Lorem ipsum dolor sit amet",
+                content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
+                imageUrl = null,
+                source = "Reuters",
+                url = "https://example.com/article",
+                publishedAt = "2026-02-07",
+                author = "John Doe",
+            ),
             onArticleUrlClick = {},
             onScroll = {},
         )

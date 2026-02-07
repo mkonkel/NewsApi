@@ -21,9 +21,9 @@ fun NewsListContent(
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding =
-            PaddingValues(
-                vertical = Dimens.PaddingMedium,
-            ),
+        PaddingValues(
+            vertical = Dimens.PaddingMedium,
+        ),
         verticalArrangement = Arrangement.spacedBy(Dimens.SpacingMedium),
     ) {
         items(
@@ -44,24 +44,24 @@ private fun NewsListContentPreview() {
     NewsApiTheme {
         NewsListContent(
             articles =
-                listOf(
-                    ArticleListItem(
-                        title = "Breaking News",
-                        description = "Lorem ipsum dolor sit amet",
-                        imageUrl = null,
-                        url = "https://example.com/1",
-                        source = "Reuters",
-                        author = "John Doe",
-                    ),
-                    ArticleListItem(
-                        title = "Breaking News",
-                        description = "Lorem ipsum dolor sit amet",
-                        imageUrl = null,
-                        url = "https://example.com/1",
-                        source = "Reuters",
-                        author = "John Doe",
-                    ),
+            listOf(
+                ArticleListItem(
+                    title = "Breaking News",
+                    description = "Lorem ipsum dolor sit amet",
+                    imageUrl = null,
+                    url = "https://example.com/1",
+                    source = "Reuters",
+                    author = "John Doe",
                 ),
+                ArticleListItem(
+                    title = "Breaking News",
+                    description = "Lorem ipsum dolor sit amet",
+                    imageUrl = null,
+                    url = "https://example.com/1",
+                    source = "Reuters",
+                    author = "John Doe",
+                ),
+            ),
             onArticleClick = {},
         )
     }

@@ -11,3 +11,6 @@ ktlint_function_naming_ignore_when_annotated_with=Composable
 
 # Keep @Inject constructor on the same line as class name
 ktlint_standard_class-signature = disabled
+
+# Keep value on the same line as assignment (e.g. modifier = Modifier)
+ktlint_standard_multiline-expression-wrapping = disabled

@@ -28,12 +28,11 @@ internal object DataModule {
         httpRepository: HttpNewsRepositoryImpl,
         inMemoryRepository: InMemoryNewsRepositoryImpl,
         dateProvider: DateProviderImpl,
-    ): NewsDataSource =
-        NewsDataSourceImpl(
-            httpRepository = httpRepository,
-            inMemoryRepository = inMemoryRepository,
-            dateProvider = dateProvider,
-        )
+    ): NewsDataSource = NewsDataSourceImpl(
+        httpRepository = httpRepository,
+        inMemoryRepository = inMemoryRepository,
+        dateProvider = dateProvider,
+    )
 
     @Provides
     @Singleton

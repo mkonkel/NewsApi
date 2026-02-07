@@ -7,25 +7,23 @@ import org.newsapi.feature.news.data.repository.HttpNewsRepository
 import org.newsapi.feature.news.data.repository.InMemoryNewsRepository
 import javax.inject.Inject
 
-internal class NewsDataSourceImpl
-    @Inject
-    constructor(
-        private val httpRepository: HttpNewsRepository,
-        private val inMemoryRepository: InMemoryNewsRepository,
-        private val dateProvider: DateProvider,
-    ) : NewsDataSource {
-        override suspend fun getArticles(forceRefresh: Boolean): List<ArticleResponse> {
-            val today = dateProvider.get()
-            val lastFetchDate = inMemoryRepository.getLastFetchDate()
+internal class NewsDataSourceImpl @Inject constructor(
+    private val httpRepository: HttpNewsRepository,
+    private val inMemoryRepository: InMemoryNewsRepository,
+    private val dateProvider: DateProvider,
+) : NewsDataSource {
+    override suspend fun getArticles(forceRefresh: Boolean): List<ArticleResponse> {
+        val today = dateProvider.get()
+        val lastFetchDate = inMemoryRepository.getLastFetchDate()
 
-            if (!forceRefresh && lastFetchDate == today) {
-                return inMemoryRepository.getArticles()
-            }
-
-            val request = TopHeadlinesRequest()
-            val articles = httpRepository.getTopHeadlines(request)
-            inMemoryRepository.saveArticles(articles, today)
-
-            return articles
+        if (!forceRefresh && lastFetchDate == today) {
+            return inMemoryRepository.getArticles()
         }
+
+        val request = TopHeadlinesRequest()
+        val articles = httpRepository.getTopHeadlines(request)
+        inMemoryRepository.saveArticles(articles, today)
+
+        return articles
     }
+}

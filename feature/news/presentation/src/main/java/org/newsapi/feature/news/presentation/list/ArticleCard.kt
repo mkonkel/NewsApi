@@ -89,16 +89,15 @@ fun ArticleCard(
                 Spacer(modifier = Modifier.height(Dimens.SpacingSmall))
 
                 Text(
-                    text =
-                        buildString {
-                            if (!article.source.isNullOrBlank()) {
-                                append(article.source)
-                            }
-                            if (!article.author.isNullOrBlank()) {
-                                if (isNotEmpty()) append("/")
-                                append(article.author)
-                            }
-                        },
+                    text = buildString {
+                        if (!article.source.isNullOrBlank()) {
+                            append(article.source)
+                        }
+                        if (!article.author.isNullOrBlank()) {
+                            if (isNotEmpty()) append("/")
+                            append(article.author)
+                        }
+                    },
                     style = MaterialTheme.typography.labelSmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
