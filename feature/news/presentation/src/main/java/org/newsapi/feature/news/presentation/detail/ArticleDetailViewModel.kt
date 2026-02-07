@@ -12,35 +12,47 @@ import org.newsapi.feature.news.presentation.domain.GetArticleByUrlUseCase
 import javax.inject.Inject
 
 @HiltViewModel
-class ArticleDetailViewModel
-    @Inject
-    constructor(
-        savedStateHandle: SavedStateHandle,
-        private val getArticleByUrlUseCase: GetArticleByUrlUseCase,
-    ) : ViewModel() {
-        private val articleUrl: String = checkNotNull(savedStateHandle["articleUrl"])
+class ArticleDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val getArticleByUrlUseCase: GetArticleByUrlUseCase,
+) : ViewModel() {
+    private val articleUrl: String = checkNotNull(savedStateHandle["articleUrl"])
 
-        private val _state = MutableStateFlow<ArticleDetailState>(ArticleDetailState.Loading)
-        val state: StateFlow<ArticleDetailState> = _state.asStateFlow()
+    private val _state = MutableStateFlow<ArticleDetailState>(ArticleDetailState.Loading)
+    val state: StateFlow<ArticleDetailState> = _state.asStateFlow()
 
-        init {
-            loadArticle()
-        }
+    init {
+        loadArticle()
+    }
 
-        @Suppress("TooGenericExceptionCaught")
-        private fun loadArticle() {
-            viewModelScope.launch {
-                try {
-                    val article = getArticleByUrlUseCase(articleUrl)
-                    _state.value =
-                        if (article != null) {
-                            ArticleDetailState.Content(article)
-                        } else {
-                            ArticleDetailState.Error("Article not found")
-                        }
-                } catch (e: Exception) {
-                    _state.value = ArticleDetailState.Error(e.message ?: "Unknown error")
-                }
+    fun onScrollChanged(scrollPosition: Int) {
+        val currentState = _state.value
+        if (currentState is ArticleDetailState.Content) {
+            val shouldShowFab = scrollPosition > SCROLL_THRESHOLD
+            if (currentState.showFab != shouldShowFab) {
+                _state.value = currentState.copy(showFab = shouldShowFab)
             }
         }
     }
+
+    @Suppress("TooGenericExceptionCaught")
+    private fun loadArticle() {
+        viewModelScope.launch {
+            try {
+                val article = getArticleByUrlUseCase(articleUrl)
+                _state.value =
+                    if (article != null) {
+                        ArticleDetailState.Content(article)
+                    } else {
+                        ArticleDetailState.Error("Article not found")
+                    }
+            } catch (e: Exception) {
+                _state.value = ArticleDetailState.Error(e.message ?: "Unknown error")
+            }
+        }
+    }
+
+    private companion object {
+        const val SCROLL_THRESHOLD = 100
+    }
+}
