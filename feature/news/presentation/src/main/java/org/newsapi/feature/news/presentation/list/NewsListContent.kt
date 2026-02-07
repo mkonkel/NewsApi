@@ -46,20 +46,20 @@ private fun NewsListContentPreview() {
             articles =
                 listOf(
                     ArticleListItem(
-                        title = "Breaking News: Major Event",
-                        description = "A significant event has occurred.",
+                        title = "Breaking News",
+                        description = "Lorem ipsum dolor sit amet",
                         imageUrl = null,
                         url = "https://example.com/1",
                         source = "Reuters",
                         author = "John Doe",
                     ),
                     ArticleListItem(
-                        title = "Tech Update: New Release",
-                        description = "A new software version has been released today.",
+                        title = "Breaking News",
+                        description = "Lorem ipsum dolor sit amet",
                         imageUrl = null,
-                        url = "https://example.com/2",
-                        source = "TechCrunch",
-                        author = "Jane Smith",
+                        url = "https://example.com/1",
+                        source = "Reuters",
+                        author = "John Doe",
                     ),
                 ),
             onArticleClick = {},
