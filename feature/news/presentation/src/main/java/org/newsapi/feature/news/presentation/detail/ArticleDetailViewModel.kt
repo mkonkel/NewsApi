@@ -13,8 +13,6 @@ import kotlinx.coroutines.launch
 import org.newsapi.feature.news.presentation.domain.GetArticleByUrlUseCase
 import javax.inject.Inject
 
-
-
 @HiltViewModel(assistedFactory = ArticleDetailViewModel.Factory::class)
 class ArticleDetailViewModel @AssistedInject constructor(
     @Assisted private val articleUrl: String,

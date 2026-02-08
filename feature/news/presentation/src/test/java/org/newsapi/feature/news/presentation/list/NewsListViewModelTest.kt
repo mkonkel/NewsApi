@@ -68,23 +68,22 @@ class NewsListViewModelTest {
     }
 
     @Test
-    fun `refresh from Content - emits Content with isRefreshing then Content with new articles`() =
-        runTest {
-            val oldArticles = (1..3).map { createArticle(it) }
-            val newArticles = (1..3).map { createArticle(it * 5) }
-            whenever { getArticles(false) } doReturn oldArticles
-            whenever { getArticles(true) } doReturn newArticles
+    fun `refresh from Content - emits Content with isRefreshing then Content with new articles`() = runTest {
+        val oldArticles = (1..3).map { createArticle(it) }
+        val newArticles = (1..3).map { createArticle(it * 5) }
+        whenever { getArticles(false) } doReturn oldArticles
+        whenever { getArticles(true) } doReturn newArticles
 
-            val viewModel = NewsListViewModel(getArticles)
+        val viewModel = NewsListViewModel(getArticles)
 
-            viewModel.state.test {
-                awaitItem() shouldBe NewsListState.Loading
-                awaitItem() shouldBe NewsListState.Content(oldArticles)
+        viewModel.state.test {
+            awaitItem() shouldBe NewsListState.Loading
+            awaitItem() shouldBe NewsListState.Content(oldArticles)
 
-                viewModel.refresh()
+            viewModel.refresh()
 
-                awaitItem() shouldBe NewsListState.Content(oldArticles, isRefreshing = true)
-                awaitItem() shouldBe NewsListState.Content(newArticles)
-            }
+            awaitItem() shouldBe NewsListState.Content(oldArticles, isRefreshing = true)
+            awaitItem() shouldBe NewsListState.Content(newArticles)
         }
+    }
 }

@@ -50,6 +50,9 @@ kotlin {
 
 dependencies {
     implementation(project(":core:ui"))
+
+    // TODO App needs to see all modules for proper Hilt graph creation
+    //  This can be fixed with some better modularisation in future.
     implementation(project(":feature:news:data"))
     implementation(project(":feature:news:domain"))
     implementation(project(":feature:news:presentation"))

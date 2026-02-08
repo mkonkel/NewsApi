@@ -22,15 +22,15 @@ class NewsDataSourceImplTest {
     private val inMemoryRepository: InMemoryNewsRepository = mock()
     private val dateProvider: DateProvider = mock()
 
-    private val today = LocalDate.of(2025, 1, 15)
-    private val yesterday = LocalDate.of(2025, 1, 14)
+    private val today = LocalDate.of(2026, 1, 15)
+    private val yesterday = LocalDate.of(2026, 1, 14)
 
     private val cachedArticles =
         listOf(
             ArticleResponse(
                 source = SourceResponse(id = "cached", name = "Cached Source"),
                 url = "https://cached.com/article",
-                publishedAt = "2025-01-15T00:00:00Z",
+                publishedAt = "2026-01-15T00:00:00Z",
                 title = "Cached Article",
             ),
         )
@@ -40,7 +40,7 @@ class NewsDataSourceImplTest {
             ArticleResponse(
                 source = SourceResponse(id = "http", name = "Http Source"),
                 url = "https://http.com/article",
-                publishedAt = "2025-01-15T12:00:00Z",
+                publishedAt = "2026-01-15T12:00:00Z",
                 title = "Http Article",
             ),
         )
