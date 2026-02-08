@@ -1,24 +1,30 @@
 package org.newsapi.feature.news.presentation.detail
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.newsapi.feature.news.presentation.domain.GetArticleByUrlUseCase
-import org.newsapi.feature.news.presentation.navigation.Screen
 import javax.inject.Inject
 
-@HiltViewModel
-class ArticleDetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+
+
+@HiltViewModel(assistedFactory = ArticleDetailViewModel.Factory::class)
+class ArticleDetailViewModel @AssistedInject constructor(
+    @Assisted private val articleUrl: String,
     private val getArticleByUrlUseCase: GetArticleByUrlUseCase,
 ) : ViewModel() {
-    private val articleUrl: String = savedStateHandle.toRoute<Screen.ArticleDetail>().articleUrl
+
+    @AssistedFactory
+    interface Factory {
+        fun create(articleUrl: String): ArticleDetailViewModel
+    }
 
     private val _state = MutableStateFlow<ArticleDetailState>(ArticleDetailState.Loading)
     val state: StateFlow<ArticleDetailState> = _state.asStateFlow()

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import org.newsapi.feature.news.presentation.detail.ArticleDetailScreen
 import org.newsapi.feature.news.presentation.list.NewsListScreen
 import org.newsapi.feature.news.presentation.navigation.Screen
@@ -22,8 +23,9 @@ fun NewsNavGraph(navController: NavHostController) {
             )
         }
 
-        composable<Screen.ArticleDetail> {
+        composable<Screen.ArticleDetail> { backStackEntry ->
             ArticleDetailScreen(
+                articleUrl = backStackEntry.toRoute<Screen.ArticleDetail>().articleUrl,
                 onBackClick = {
                     navController.popBackStack()
                 },

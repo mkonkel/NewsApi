@@ -22,18 +22,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.newsapi.core.ui.theme.Dimens
 import org.newsapi.core.ui.theme.ExtendedTheme
 import org.newsapi.core.ui.widgets.AppErrorState
 import org.newsapi.core.ui.widgets.AppToolbar
 import org.newsapi.feature.news.presentation.R
 import org.newsapi.feature.news.presentation.dimens.NewsDimens
+import javax.inject.Inject
 
 @Composable
 fun ArticleDetailScreen(
-    viewModel: ArticleDetailViewModel = hiltViewModel(),
+    articleUrl: String,
     onBackClick: () -> Unit = {},
 ) {
+    val viewModel =
+        hiltViewModel<ArticleDetailViewModel, ArticleDetailViewModel.Factory> { factory ->
+            factory.create(articleUrl)
+        }
+
     val state by viewModel.state.collectAsState()
     val context = LocalContext.current
 
